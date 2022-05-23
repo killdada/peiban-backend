@@ -1,0 +1,40 @@
+version: "3.2"
+networks:
+   my-net:
+services:
+  peiban:
+    build: .
+    command: npm run docker
+    restart: always
+    volumes:
+      - "peiban:/node"
+    # ports:
+    #   - "7001:7001"
+    # links: 改用network关联
+    #   - mongo
+    networks:
+      - my-net
+    depends_on:
+      - mongo
+
+  nginx:
+     build: nginx
+     networks:
+      - my-net
+     depends_on:
+      - peiban
+     ports:
+       - "80:80"
+
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - "peiban:/var/lib/mongo"
+    networks:
+      - my-net
+    expose:
+      - "27017"
+
+volumes:
+  peiban:
