@@ -6,6 +6,15 @@ const qiniu = require("qiniu");
 const pdf2png = require("../../pdftoimg.js");
 const qiniuConfig = require("../../qiniu.js");
 
+// qiankun配置，默认不提交到git上，用户请自行配置自己的qiniu，格式如下
+// const qiniuConfig = {
+//   accessKey: "**",
+//   secretKey: "**",
+//   bucket: "***",
+//   expires: 3600,
+//   domain: "**",
+// };
+
 // 格式化时间
 const formatTime = (time) => moment(time).format("YYYY-MM-DD HH:mm:ss");
 
