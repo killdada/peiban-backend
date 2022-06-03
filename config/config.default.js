@@ -43,7 +43,10 @@ module.exports = (appInfo) => {
 
   config.cors = {
     // credentials: true,
-    origin: "http://localhost:8888,https://peiban.yenmysoft.com.cn",
+    origin:
+      process.env.NODE_ENV === "production"
+        ? "https://peiban.yenmysoft.com.cn"
+        : "http://localhost:8888",
     allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH",
   };
 
